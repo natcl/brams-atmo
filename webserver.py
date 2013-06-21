@@ -14,7 +14,9 @@ render = web.template.render('templates/')
 
 class atmo_server:        
     def GET(self):
-        return render.index(sht1x.read_temperature_C(), sht1x.read_humidity())
+        temperature = sht1x.read_temperature_C()
+        humidity = '{0:.2f}'.format(sht1x.read_humidity())
+        return render.index(temperature, humidity)
 
 if __name__ == "__main__":
     app.run()
