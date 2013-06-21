@@ -8,7 +8,7 @@ $def with (temperature, humidity)
       google.load('visualization', '1', {packages:['gauge']});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var jsonData = $.ajax({url: "http://192.168.2.6:8080/json", dataType:"json", async: false}).responseText;
+        var jsonData = $$.ajax({url: "json", dataType:"json", async: false}).responseText;
         
         var data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
