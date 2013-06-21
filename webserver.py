@@ -16,13 +16,13 @@ render = web.template.render('templates/')
 
 class atmo_server:        
     def GET(self):
-        temperature = sht1x.read_temperature_C()
+        temperature = '{0:.2f}'.format(sht1x.read_temperature_C())
         humidity = '{0:.2f}'.format(sht1x.read_humidity())
         return render.index(temperature, humidity)
 
 class render_json:        
     def GET(self):
-        temperature = sht1x.read_temperature_C()
+        temperature = '{0:.2f}'.format(sht1x.read_temperature_C())
         humidity = '{0:.2f}'.format(sht1x.read_humidity())
         jsonData = json.dumps({'temperature': temperature, 'humidity': humidity})
         return jsonData
