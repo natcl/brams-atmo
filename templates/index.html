@@ -12,8 +12,8 @@ $def with (temperature, humidity)
         
         var data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Temp', jsonData["temperature"]],
-          ['Humidity', jsonData["humidity"]]
+          ['Temp', jsonData.temperature],
+          ['Humidity', jsonData.humidity]
         ]);
 
         var options = {
