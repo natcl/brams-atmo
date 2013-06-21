@@ -24,7 +24,7 @@ class render_json:
     def GET(self):
         temperature = '{0:.2f}'.format(sht1x.read_temperature_C())
         humidity = '{0:.2f}'.format(sht1x.read_humidity())
-        jsonData = json.dumps({'temperature': temperature, 'humidity': humidity})
+        jsonData = json.dumps({'temperature': float(temperature), 'humidity': float(humidity)})
         return jsonData
 
 if __name__ == "__main__":
