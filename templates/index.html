@@ -7,6 +7,7 @@ $def with (temperature, humidity)
     <script type='text/javascript'>
       google.load('visualization', '1', {packages:['gauge']});
       google.setOnLoadCallback(drawChart);
+      setInterval(function(){drawChart()},1000);
       function drawChart() {
         var jsonData = JSON.parse($$.ajax({url: "json", dataType:"json", async: false}).responseText);
         
