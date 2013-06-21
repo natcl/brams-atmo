@@ -3,14 +3,21 @@ $def with (temperature, humidity)
 <html>
   <head>
     <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <script type="text/javascript" src="jquery-1.6.2.min.js"></script>
     <script type='text/javascript'>
       google.load('visualization', '1', {packages:['gauge']});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
+        var jsonData = $.ajax({
+          url: "json",
+          dataType:"json",
+          async: false
+          }).responseText;
+        
         var data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Temp', $temperature],
-          ['Humidity', $humidity]
+          ['Temp', jsonData["temperature"]],
+          ['Humidity', jsonData["humidity"]]
         ]);
 
         var options = {
