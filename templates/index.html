@@ -14,6 +14,7 @@ $def with (temperature, humidity)
       
       function init() {
         chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+        drawChart();
       }
       
       function drawChart() {
@@ -31,7 +32,7 @@ $def with (temperature, humidity)
           yellowFrom:75, yellowTo: 90,
           minorTicks: 5,
           animation:{
-            duration: 500,
+            duration: 250,
             easing: 'linear'
           }
         };
