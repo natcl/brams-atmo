@@ -14,6 +14,9 @@ app = web.application(urls, globals())
 
 render = web.template.render('templates/')
 
+#temperature = 2
+#humidity = 4
+
 class atmo_server:        
     def GET(self):
         temperature = '{0:.2f}'.format(sht1x.read_temperature_C())
