@@ -10,11 +10,12 @@ $def with (temperature, humidity)
       var chart;
       google.setOnLoadCallback(init);
       
-      setInterval(function(){drawChart()},1000);
+      setInterval(function(){drawChart()},500);
       
       function init() {
         chart = new google.visualization.Gauge(document.getElementById('chart_div'));
       }
+      
       function drawChart() {
         var jsonData = JSON.parse($$.ajax({url: "json", dataType:"json", async: false}).responseText);
         
