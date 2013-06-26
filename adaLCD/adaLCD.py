@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import serial
 
-BACKLIGHT_ON = chr(0xFE) + chr(0x42)
+BACKLIGHT_ON = chr(0xFE) + chr(0x42) + chr(255)
 BACKLIGHT_OFF = chr(0xFE) + chr(0x46)
 BRIGHTNESS = chr(0xFE) + chr(0x99) + '{0}'
 CONTRAST = chr(0xFE) + chr(0x50) + '{0}'
