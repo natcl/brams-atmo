@@ -52,4 +52,5 @@ if __name__ == '__main__':
     lcd.rgb(0,0,255)
     time.sleep(5)
     lcd.close()
+    time.sleep(1)
 
