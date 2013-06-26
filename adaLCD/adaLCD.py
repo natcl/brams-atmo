@@ -38,13 +38,18 @@ class adaLCD(object):
 
 if __name__ == '__main__':
     import sys
+    import time
     try:
         lcd = adaLCD(sys.argv[1])
     except:
         lcd = adaLCD('/dev/tty.usbmodem411')
     lcd.clear()
-    lcd.brightness(127)
-    lcd.contrast(220)
-    lcd.write('Allo2\n\rDSDS')
-    lcd.rgb(127,0,127)
+    lcd.write('Hello\n\rWorld!')
+    lcd.rgb(255,0,0)
+    time.sleep(1)
+    lcd.rgb(0,255,0)
+    time.sleep(1)
+    lcd.rgb(0,0,255)
+    time.sleep(5)
+    lcd.close()
 
