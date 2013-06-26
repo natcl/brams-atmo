@@ -43,6 +43,7 @@ if __name__ == '__main__':
         lcd = adaLCD(sys.argv[1])
     except:
         lcd = adaLCD('/dev/tty.usbmodem411')
+    lcd.backlight_on()
     lcd.clear()
     lcd.write('Hello\n\rWorld!')
     lcd.rgb(255,0,0)
@@ -51,6 +52,7 @@ if __name__ == '__main__':
     time.sleep(1)
     lcd.rgb(0,0,255)
     time.sleep(5)
+    lcd.clear()
+    lcd.backlight_off()
     lcd.close()
-    time.sleep(1)
 
