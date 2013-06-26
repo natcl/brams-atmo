@@ -11,12 +11,12 @@ lcd.clear()
 lcd.backlight_on()
 
 try:
-	while(True):
-		lcd.clear()
-		lcd.print('Temperature {0:.2f}'.format(sht1x.read_temperature_C()))
-		lcd.print('\n\r')
-		lcd.print('Humidity {0:.2f}'.format(sht1x.read_humidity()))
-		time.sleep(2)
+    while(True):
+        lcd.clear()
+        lcd.print('Temperature {0:.2f}'.format(sht1x.read_temperature_C()))
+        lcd.print('\n\r')
+        lcd.print('Humidity {0:.2f}'.format(sht1x.read_humidity()))
+        time.sleep(2)
 except:
-	print('Shutting down')
-	lcd.close()
+    print('Shutting down')
+    lcd.close()
