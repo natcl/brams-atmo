@@ -40,7 +40,7 @@ if __name__ == '__main__':
     import sys
     try:
         lcd = adaLCD(sys.argv[1])
-    else:
+    except:
         lcd = adaLCD('/dev/tty.usbmodem411')
     lcd.clear()
     lcd.brightness(127)
