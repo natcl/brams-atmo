@@ -33,10 +33,14 @@ class adaLCD(object):
 	def write(self, value):
 		self.lcd.write(value)
 
+	def close(self):
+		self.lcd.close()
+
 if __name__ == '__main__':
 	lcd = adaLCD('/dev/tty.usbmodem411')
 	lcd.clear()
 	lcd.brightness(127)
 	lcd.contrast(220)
-	lcd.write('Allo')
+	lcd.write('Allo2\n\rDSDS')
 	lcd.rgb(127,0,127)
+
