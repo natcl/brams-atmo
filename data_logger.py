@@ -17,6 +17,10 @@ try:
     while(True):
         temperature = sht1x.read_temperature_C()
         humidity = sht1x.read_humidity()
+        if humidity > 60:
+            lcd.rgb(255,0,0)
+        else:
+            lcd.rgb(0,255,0)
         lcd.clear()
         lcd.write('Temp {0:.2f}'.format(temperature))
         lcd.write('\n\r')
