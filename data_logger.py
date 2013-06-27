@@ -15,8 +15,9 @@ try:
         lcd.clear()
         temperature = sht1x.read_temperature_C()
         humidity = sht1x.read_humidity()
-        lcd.print(temperature)
-        lcd.print(humidity)
+        lcd.write('Temperature {0:.2f}'.format(temperature))
+        lcd.write('\n\r')
+        lcd.write('Humidity {0:.2f}'.format())
         time.sleep(2)
 except:
     print('Shutting down')
