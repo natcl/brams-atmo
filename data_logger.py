@@ -16,7 +16,7 @@ try:
         humidity = sht1x.read_humidity()
         lcd.clear()
         lcd.home()
-        lcd.write('Temperature {0:.2f}'.format(temperature))
+        lcd.write('Temp {0:.2f}'.format(temperature))
         lcd.write('\n\r')
         lcd.write('Humidity {0:.2f}'.format(humidity))
         time.sleep(2)
