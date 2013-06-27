@@ -12,6 +12,10 @@ HOME = chr(0xFE) + chr(0x48)
 class adaLCD(object):
     def __init__(self, port):
         self.lcd = serial.Serial(port, 9600)
+
+        self._brightness = 0
+        self._contrast = 0
+        self._rgb = []
     
     def clear(self):
         self.lcd.write(CLEAR)
@@ -26,13 +30,25 @@ class adaLCD(object):
         self.lcd.write(BACKLIGHT_OFF)
 
     def brightness(self, value):
-        self.lcd.write(BRIGHTNESS.format(chr(value)))
+        if self._brightness == value:
+            return
+        else:
+            self._brightness = value
+            self.lcd.write(BRIGHTNESS.format(chr(self._brightness)))
     
     def contrast(self, value):
-        self.lcd.write(CONTRAST.format(chr(value)))
+        if self._contrast == value:
+            return
+        else:
+            self._contrast = value
+            self.lcd.write(CONTRAST.format(chr(self._contrast)))
     
     def rgb(self, r,g,b):
-        self.lcd.write(RGB.format(chr(r), chr(g), chr(b)))
+        if self._rgb == [r,g,b]:
+            return
+        else:
+            self._rgb = [r,g,b]
+            self.lcd.write(RGB.format(chr(r), chr(g), chr(b)))
 
     def write(self, value):
         self.lcd.write(value)
