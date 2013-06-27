@@ -22,9 +22,9 @@ try:
         else:
             lcd.rgb(0,255,0)
         lcd.clear()
-        lcd.write('Temp {0:.2f}'.format(temperature))
+        lcd.write('Temp:     {0:.2f}'.format(temperature))
         lcd.write('\n\r')
-        lcd.write('Humidity {0:.2f}'.format(humidity))
+        lcd.write('Humidity: {0:.2f}'.format(humidity))
         time.sleep(2)
 
 except KeyboardInterrupt:
