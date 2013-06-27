@@ -22,4 +22,5 @@ try:
         time.sleep(2)
 except KeyboardInterrupt:
     print('Shutting down')
+    lcd.clear()
     lcd.close()
