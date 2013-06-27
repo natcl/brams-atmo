@@ -10,8 +10,8 @@ lcd = adaLCD('/dev/ttyACM0')
 lcd.clear()
 lcd.backlight_on()
 
-try:
-    while(True):
+while(True):
+    try:
         lcd.clear()
         temperature = sht1x.read_temperature_C()
         humidity = sht1x.read_humidity()
@@ -19,7 +19,7 @@ try:
         lcd.write('\n\r')
         lcd.write('Humidity {0:.2f}'.format(humidity))
         time.sleep(2)
-except Exception as e:
-    print(e)
-    print('Shutting down')
-    lcd.close()
+    except Exception as e:
+        print(e)
+        print('Shutting down')
+        lcd.close()
