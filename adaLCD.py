@@ -7,6 +7,7 @@ BRIGHTNESS = chr(0xFE) + chr(0x99) + '{0}'
 CONTRAST = chr(0xFE) + chr(0x50) + '{0}'
 CLEAR = chr(0xFE) + chr(0x58)
 RGB = chr(0xFE) + chr(0xD0) + '{0}{1}{2}'
+HOME = chr(0xFE) + chr(0x48)
 
 class adaLCD(object):
     def __init__(self, port):
@@ -14,6 +15,9 @@ class adaLCD(object):
     
     def clear(self):
         self.lcd.write(CLEAR)
+    
+    def home(self):
+        self.lcd.write(HOME)
 
     def backlight_on(self):
         self.lcd.write(BACKLIGHT_ON)
