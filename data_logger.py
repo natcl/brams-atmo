@@ -11,7 +11,7 @@ sht1x = SHT1x(dataPin, clkPin, SHT1x.GPIO_BOARD)
 
 lcd = adaLCD('/dev/ttyAMA0')
 
-logHandler = TimedRotatingFileHandler("/var/log/atmo-piano.log",when="M", interval=2)
+logHandler = TimedRotatingFileHandler("/var/log/atmo-piano.log",when="H", interval=1)
 logFormatter = logging.Formatter('%(asctime)s %(message)s')
 logHandler.setFormatter( logFormatter )
 logger = logging.getLogger( 'AtmoPiano' )
@@ -37,7 +37,7 @@ try:
         lcd.linefeed()
         lcd.write('Humidity: {0:.2f}'.format(humidity))
         logger.info('T: {0:.2f} H: {1:.2f}'.format(temperature,humidity))
-        time.sleep(2)
+        time.sleep(60)
 
 except KeyboardInterrupt:
     print('Shutting down')
