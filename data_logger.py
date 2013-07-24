@@ -1,4 +1,5 @@
 import time
+import socket
 #from adaLCD import adaLCD
 from sparkfunLCD import sparkfunLCD as adaLCD
 import logging
@@ -11,15 +12,16 @@ sht1x = SHT1x(dataPin, clkPin, SHT1x.GPIO_BOARD)
 
 lcd = adaLCD('/dev/ttyAMA0')
 
-logHandler = TimedRotatingFileHandler("/var/log/atmo-piano.log",when="H", interval=1)
+hostname = socket.gethostname()
+
+logHandler = TimedRotatingFileHandler("/var/log/{0}.log".format(hostname),when="H", interval=1)
 logFormatter = logging.Formatter('%(asctime)s %(message)s')
-logHandler.setFormatter( logFormatter )
-logger = logging.getLogger( 'AtmoPiano' )
-logger.addHandler( logHandler )
-logger.setLevel( logging.INFO )
+logHandler.setFormatter(logFormatter)
+logger = logging.getLogger(hostname)
+logger.addHandler(logHandler)
+logger.setLevel(logging.INFO)
 
 lcd.clear()
-lcd.backlight_on()
 lcd.contrast(220)
 lcd.brightness(255)
 lcd.rgb(0,255,0)
@@ -42,5 +44,4 @@ try:
 except KeyboardInterrupt:
     print('Shutting down')
     lcd.clear()
-    lcd.backlight_off()
     lcd.close()
