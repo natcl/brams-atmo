@@ -2,19 +2,18 @@ import time
 import socket
 #from adaLCD import adaLCD
 from sparkfunLCD import sparkfunLCD as adaLCD
+import dhtreader
 import logging
 from logging.handlers import TimedRotatingFileHandler
-from sht1x.Sht1x import Sht1x as SHT1x
 
-dataPin = 11
-clkPin = 7
-sht1x = SHT1x(dataPin, clkPin, SHT1x.GPIO_BOARD)
+dhtPin = 4 
 
 lcd = adaLCD('/dev/ttyAMA0')
+dhtreader.init()
 
 hostname = socket.gethostname()
 
-logHandler = TimedRotatingFileHandler("/var/log/{0}.log".format(hostname),when="H", interval=1)
+logHandler = TimedRotatingFileHandler("/var/log/{0}.log".format(hostname),when="D", interval=1)
 logFormatter = logging.Formatter('%(asctime)s %(message)s')
 logHandler.setFormatter(logFormatter)
 logger = logging.getLogger(hostname)
@@ -28,8 +27,7 @@ lcd.rgb(0,255,0)
 
 try:
     while(True):
-        temperature = sht1x.read_temperature_C()
-        humidity = sht1x.read_humidity()
+        temperature, humidity = dhtreader.read(22, dhtPin)
         if humidity > 60:
             lcd.rgb(255,0,0)
         else:

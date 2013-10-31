@@ -1,10 +1,9 @@
-from sht1x.Sht1x import Sht1x as SHT1x
+import dhtreader
 import web
 import json
 
-dataPin = 11
-clkPin = 7
-sht1x = SHT1x(dataPin, clkPin, SHT1x.GPIO_BOARD)
+dhtPin = 4
+dhtreader.init()
         
 urls = (
     '/', 'atmo_server',
@@ -23,10 +22,16 @@ class atmo_server:
 
 class render_json:        
     def GET(self):
-        temperature = '{0:.2f}'.format(sht1x.read_temperature_C())
-        humidity = '{0:.2f}'.format(sht1x.read_humidity())
-        jsonData = json.dumps({'temperature': float(temperature), 'humidity': float(humidity)})
-        return jsonData
+        temperature, humidity = (0,0)
+        try:
+            temperature, humidity = dhtreader.read(22, dhtPin)
+        except:
+            print('Error reading sensor')
+        if temperature and humidity:
+            jsonData = json.dumps({'temperature': float('{0:.2f}'.format(temperature)), 'humidity': float('{0:.2f}'.format(humidity))})
+            return jsonData
+        else:
+            return
 
 if __name__ == "__main__":
     app.run()
