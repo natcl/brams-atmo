@@ -2,14 +2,12 @@ import time
 import socket
 #from adaLCD import adaLCD
 from sparkfunLCD import sparkfunLCD as adaLCD
-import dhtreader
 import logging
 from logging.handlers import TimedRotatingFileHandler
-
-dhtPin = 4 
+import urllib2
+import json
 
 lcd = adaLCD('/dev/ttyAMA0')
-dhtreader.init()
 
 hostname = socket.gethostname()
 
@@ -27,7 +25,14 @@ lcd.rgb(0,255,0)
 
 try:
     while(True):
-        temperature, humidity = dhtreader.read(22, dhtPin)
+        json_data = None
+        while(json_data is None):
+            try:
+                json_data = json.loads(urllib2.urlopen('http://localhost:8080/json').read()) 
+                temperature = json_data[u'temperature']
+                humidity = json_data[u'humidity']
+            except:
+                pass
         if humidity > 60:
             lcd.rgb(255,0,0)
         else:
