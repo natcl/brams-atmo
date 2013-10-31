@@ -7,29 +7,56 @@ $def with ()
     <script type='text/javascript'>
       google.load('visualization', '1', {packages:['gauge']});
       
-      var chart;
+      var t_chart;
+      var h_chart;
       google.setOnLoadCallback(init);
       
-      setInterval(function(){drawChart()},2000);
+      setInterval(function(){drawtChart()},2000);
+      setInterval(function(){drawhChart()},2000);
       
       function init() {
-        chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-        drawChart();
+        t_chart = new google.visualization.Gauge(document.getElementById('t_chart_div'));
+        h_chart = new google.visualization.Gauge(document.getElementById('h_chart_div'));
+        drawtChart();
+        drawhChart();
       }
       
-      function drawChart() {
+      function drawtChart() {
         var jsonData = JSON.parse($$.ajax({url: "json", dataType:"json", async: false}).responseText);
         
         var data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Temp', jsonData.temperature],
+          ['Temp', jsonData.temperature]
+        ]);
+
+        var options = {
+          width: 400, height: 120,
+          greenFrom: 15, greenTo: 27,
+          redFrom: 35, redTo: 100,
+          yellowFrom:27, yellowTo: 35,
+          minorTicks: 5,
+          animation:{
+            uration: 250,
+            easing: 'linear'
+          }
+        };
+
+        t_chart.draw(data, options);
+      }
+      
+      function drawhChart() {
+        var jsonData = JSON.parse($$.ajax({url: "json", dataType:"json", async: false}).responseText);
+        
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
           ['Humidity', jsonData.humidity]
         ]);
 
         var options = {
           width: 400, height: 120,
-          redFrom: 90, redTo: 100,
-          yellowFrom:75, yellowTo: 90,
+          greenFrom: 25, greenTo: 50,
+          redFrom: 60, redTo: 100,
+          yellowFrom:50, yellowTo: 60,
           minorTicks: 5,
           animation:{
             duration: 250,
@@ -37,11 +64,12 @@ $def with ()
           }
         };
 
-        chart.draw(data, options);
-      }
-    </script>
+        h_chart.draw(data, options);
+      }    
+  </script>
   </head>
   <body>
-    <div id='chart_div'></div>
+    <div id='t_chart_div'></div>
+    <div id='h_chart_div'></div>
   </body>
 </html>
