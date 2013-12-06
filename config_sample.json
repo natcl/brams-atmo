@@ -4,5 +4,9 @@
 	"email_notifications": true,
 	"smtp_server": "smtp.umontreal.ca",
 	"email_from": "fromemail@host.com",
-	"email_to": ["toemail@host.com"]
+	"email_to": ["toemail@host.com"],
+	"humidity_low": 30,
+	"humidity_high": 60,
+	"temperature_low": 15,
+	"temperature_high": 30
 }
