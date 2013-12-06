@@ -6,8 +6,7 @@ import time
 import urllib2
 import datetime
 
-with open('config.json', 'r') as config:
-    config_data = json.loads(config.read())
+
 
 sent_flag = False
 sent_day = 0
@@ -26,6 +25,10 @@ def send_mail(temperature, humidity):
        print "Error: unable to send email"
 
 while True:
+    
+    with open('config.json', 'r') as config:
+        config_data = json.loads(config.read())
+    
     if config_data['email_notifications']:
         if datetime.datetime.now().day > sent_day:
             sent_flag = False
