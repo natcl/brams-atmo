@@ -1,0 +1,8 @@
+{
+	"name": "name_of_device",
+	"lcd_driver": "sparkfun",
+	"email_notifications": true,
+	"smtp_server": "smtp.umontreal.ca",
+	"email_from": "fromemail@host.com",
+	"email_to": ["toemail@host.com"]
+}

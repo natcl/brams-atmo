@@ -1,27 +1,23 @@
+#!/usr/bin/python
+
+import json
 import time
 import socket
-#from adaLCD import adaLCD
-from sparkfunLCD import sparkfunLCD as adaLCD
 import logging
 from logging.handlers import TimedRotatingFileHandler
 import urllib2
-import json
 
-lcd = adaLCD('/dev/ttyAMA0')
+with open('config.json', 'r') as config:
+    config_data = json.loads(config.read())
 
-hostname = socket.gethostname()
+# Will log every 5 minutes with a file rollover on Mondays
 
-logHandler = TimedRotatingFileHandler("/var/log/{0}.log".format(hostname),when="D", interval=1)
+logHandler = TimedRotatingFileHandler("/var/log/{0}.log".format(config_data['name']), when="W0")
 logFormatter = logging.Formatter('%(asctime)s %(message)s')
 logHandler.setFormatter(logFormatter)
-logger = logging.getLogger(hostname)
+logger = logging.getLogger(config_data['name'])
 logger.addHandler(logHandler)
 logger.setLevel(logging.INFO)
-
-lcd.clear()
-lcd.contrast(220)
-lcd.brightness(255)
-lcd.rgb(0,255,0)
 
 try:
     while(True):
@@ -33,18 +29,8 @@ try:
                 humidity = json_data[u'humidity']
             except:
                 pass
-        if humidity > 60:
-            lcd.rgb(255,0,0)
-        else:
-            lcd.rgb(0,255,0)
-        lcd.clear()
-        lcd.write('Temp:     {0:.2f}'.format(temperature))
-        lcd.linefeed()
-        lcd.write('Humidity: {0:.2f}'.format(humidity))
         logger.info('T: {0:.2f} H: {1:.2f}'.format(temperature,humidity))
-        time.sleep(60)
+        time.sleep(60*5)
 
 except KeyboardInterrupt:
     print('Shutting down')
-    lcd.clear()
-    lcd.close()
