@@ -9,4 +9,5 @@ screen -t logger 3 /home/pi/brams-atmo/startup/logger.sh
 screen -t email 4 /home/pi/brams-atmo/startup/email.sh
 screen -t log 5 tail -f /var/log/atmo.log
 
+zombie KR
 caption always
