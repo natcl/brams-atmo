@@ -12,7 +12,7 @@ with open('config.json', 'r') as config:
 
 # Will log every 5 minutes with a file rollover on Mondays
 
-logHandler = TimedRotatingFileHandler("/var/log/{0}.log".format(config_data['name']), when="W0")
+logHandler = TimedRotatingFileHandler("/var/log/atmo.log", when="W0")
 logFormatter = logging.Formatter('%(asctime)s %(message)s')
 logHandler.setFormatter(logFormatter)
 logger = logging.getLogger(config_data['name'])
