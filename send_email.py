@@ -3,10 +3,7 @@
 import json
 import smtplib
 import time
-import urllib2
 import datetime
-
-
 
 sent_flag = False
 sent_day = 0
@@ -32,14 +29,17 @@ while True:
     if config_data['email_notifications']:
         if datetime.datetime.now().day > sent_day:
             sent_flag = False
-        json_data = None
-        while json_data is None:
+        
+        temperature, humidity = (None, None)
+        while (temperature is None and humidity is None):
             try:
-                json_data = json.loads(urllib2.urlopen('http://localhost:8080/json').read()) 
-                temperature = json_data[u'temperature']
-                humidity = json_data[u'humidity']
+                with open('TEMP', 'r') as t:
+                    temperature = float(t.read())
+                with open('HUMIDITY', 'r') as h:
+                    humidity = float(h.read())
             except:
                 pass
+
         if humidity < config_data['humidity_low'] or humidity > config_data['humidity_high'] or temperature < config_data['temperature_low'] or temperature > config_data['temperature_high']:
             if not sent_flag:
                 send_mail(temperature, humidity)

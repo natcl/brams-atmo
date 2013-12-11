@@ -3,11 +3,12 @@ startup_message off
 sessionname atmo
 
 screen -t main 0 bash
-screen -t webserver 1 /home/pi/brams-atmo/startup/webserver.sh
-screen -t lcd 2 /home/pi/brams-atmo/startup/lcd.sh
-screen -t logger 3 /home/pi/brams-atmo/startup/logger.sh
-screen -t email 4 /home/pi/brams-atmo/startup/email.sh
-screen -t log 5 tail -f /var/log/atmo.log
+screen -t update 1 /home/pi/brams-atmo/startup/update.sh
+screen -t webserver 2 /home/pi/brams-atmo/startup/webserver.sh
+screen -t lcd 3 /home/pi/brams-atmo/startup/lcd.sh
+screen -t logger 4 /home/pi/brams-atmo/startup/logger.sh
+screen -t email 5 /home/pi/brams-atmo/startup/email.sh
+screen -t log 6 tail -f /var/log/atmo.log
 
 zombie KR
 caption always

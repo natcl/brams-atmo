@@ -2,7 +2,6 @@
 
 import json
 import time
-import urllib2
 
 with open('config.json', 'r') as config:
     config_data = json.loads(config.read())
@@ -20,15 +19,17 @@ lcd.brightness(255)
 lcd.rgb(0,255,0)
 
 try:
-    while(True):
-        json_data = None
-        while(json_data is None):
+    while True:
+        temperature, humidity = (None, None)
+        while (temperature is None and humidity is None):
             try:
-                json_data = json.loads(urllib2.urlopen('http://localhost:8080/json').read()) 
-                temperature = json_data[u'temperature']
-                humidity = json_data[u'humidity']
+                with open('TEMP', 'r') as t:
+                    temperature = float(t.read())
+                with open('HUMIDITY', 'r') as h:
+                    humidity = float(h.read())
             except:
                 pass
+
         if humidity > 60:
             lcd.rgb(255,0,0)
         else:
@@ -37,7 +38,7 @@ try:
         lcd.write('Temp:     {0:.2f}'.format(temperature))
         lcd.linefeed()
         lcd.write('Humidity: {0:.2f}'.format(humidity))
-        time.sleep(2)
+        time.sleep(10)
 
 except KeyboardInterrupt:
     print('Shutting down')
