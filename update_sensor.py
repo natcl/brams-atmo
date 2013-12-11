@@ -17,8 +17,8 @@ while True:
     
     if temperature is not None and humidity is not None:
         with open('TEMP', 'w') as t:
-            t.write(str(temperature))
+            t.write('{0:.2f}'.format(temperature))
         with open('HUMIDITY','w') as h:
-            h.write(str(humidity))
-        print(str(temperature) + " " + str(humidity))
+            h.write('{0:.2f}'.format(humidity))
+    	print(str(temperature) + " " + str(humidity))
     time.sleep(3)
