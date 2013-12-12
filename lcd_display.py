@@ -35,9 +35,11 @@ try:
         else:
             lcd.rgb(0,255,0)
         lcd.clear()
-        lcd.write('Temp:     {0:.2f}'.format(temperature))
+        if isinstance(temperature, float):
+            lcd.write('Temp:     {0:.2f}'.format(temperature))
         lcd.linefeed()
-        lcd.write('Humidity: {0:.2f}'.format(humidity))
+        if isinstance(humidity, float):
+            lcd.write('Humidity: {0:.2f}'.format(humidity))
         time.sleep(10)
 
 except KeyboardInterrupt:

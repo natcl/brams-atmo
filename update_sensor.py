@@ -15,7 +15,7 @@ while True:
     except:
         print('Error reading sensor')
     
-    if temperature is not None and humidity is not None:
+    if isinstance(temperature, float) and isinstance(humidity, float):
         with open('TEMP', 'w') as t:
             t.write('{0:.2f}'.format(temperature))
         with open('HUMIDITY','w') as h:
