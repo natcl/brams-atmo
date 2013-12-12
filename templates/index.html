@@ -1,4 +1,4 @@
-$def with ()
+$def with (config_data)
 
 <html>
   <head>
@@ -67,8 +67,10 @@ $def with ()
         h_chart.draw(data, options);
       }    
   </script>
+  <title>$config_data['name'].capitalize() at $config_data['location']</title>
   </head>
   <body>
+    <h1>$config_data['name'].capitalize() at $config_data['location']</h1>
     <div id='t_chart_div'></div>
     <div id='h_chart_div'></div>
   </body>

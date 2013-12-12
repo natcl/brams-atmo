@@ -1,6 +1,9 @@
 import web
 import json
 
+with open('config.json', 'r') as config:
+    config_data = json.loads(config.read())
+
 urls = (
     '/', 'atmo_server',
     '/json', 'render_json'
@@ -11,7 +14,7 @@ render = web.template.render('templates/')
 
 class atmo_server:        
     def GET(self):
-        return render.index()
+        return render.index(config_data)
 
 class render_json:        
     def GET(self):

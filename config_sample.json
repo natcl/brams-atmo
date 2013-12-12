@@ -1,5 +1,6 @@
 {
 	"name": "name_of_device",
+	"location": "Name of location",
 	"lcd_driver": "sparkfun",
 	"email_notifications": true,
 	"smtp_server": "smtp.umontreal.ca",
