@@ -40,10 +40,11 @@ while True:
             except:
                 pass
 
-        if humidity < config_data['humidity_low'] or humidity > config_data['humidity_high'] or temperature < config_data['temperature_low'] or temperature > config_data['temperature_high']:
-            if not sent_flag:
-                send_mail(temperature, humidity)
-                sent_flag = True
-                sent_day = datetime.datetime.now().day
+        if (temperature is not None and humidity is not None):
+            if humidity < config_data['humidity_low'] or humidity > config_data['humidity_high'] or temperature < config_data['temperature_low'] or temperature > config_data['temperature_high']:
+                if not sent_flag:
+                    send_mail(temperature, humidity)
+                    sent_flag = True
+                    sent_day = datetime.datetime.now().day
 
     time.sleep(30)
