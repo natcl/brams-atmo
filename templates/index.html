@@ -31,9 +31,9 @@ $def with (config_data)
 
         var options = {
           width: 400, height: 120,
-          greenFrom: 15, greenTo: 30,
-          redFrom: 30, redTo: 100,
-          yellowFrom:0, yellowTo: 15,
+          greenFrom: $config_data['temperature_low'], greenTo: $config_data['temperature_high'],
+          redFrom: $config_data['temperature_high'], redTo: 100,
+          yellowFrom:0, yellowTo: $config_data['temperature_low'],
           minorTicks: 5,
           animation:{
             uration: 250,
@@ -54,9 +54,9 @@ $def with (config_data)
 
         var options = {
           width: 400, height: 120,
-          greenFrom: 25, greenTo: 50,
-          redFrom: 0, redTo: 25,
-          yellowFrom:50, yellowTo: 100,
+          greenFrom: $config_data['humidity_low'], greenTo: $config_data['humidity_high'],
+          redFrom: 0, redTo: $config_data['humidity_low'],
+          yellowFrom:$config_data['humidity_high'], yellowTo: 100,
           minorTicks: 5,
           animation:{
             duration: 250,

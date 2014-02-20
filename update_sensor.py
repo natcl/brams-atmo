@@ -21,4 +21,4 @@ while True:
         with open('HUMIDITY','w') as h:
             h.write('{0:.2f}'.format(humidity))
     	print(str(temperature) + " " + str(humidity))
-    time.sleep(3)
+    time.sleep(5)
