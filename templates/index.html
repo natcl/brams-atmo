@@ -11,8 +11,8 @@ $def with (config_data)
       var h_chart;
       google.setOnLoadCallback(init);
       
-      setInterval(function(){drawtChart()},2000);
-      setInterval(function(){drawhChart()},2000);
+      setInterval(function(){drawtChart()},$config_data['poll_interval'] * 1000);
+      setInterval(function(){drawhChart()},$config_data['poll_interval'] * 1000);
       
       function init() {
         t_chart = new google.visualization.Gauge(document.getElementById('t_chart_div'));
