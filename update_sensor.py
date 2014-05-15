@@ -1,24 +1,23 @@
 #!/usr/bin/python
-
-import dhtreader
+import os
+import subprocess
 import time
+import json
 
-dhtPin = 4
-dhtreader.init()
-
-temperature = None
-humidity = None
+with open('config.json', 'r') as config:
+    config_data = json.loads(config.read())
 
 while True:
-    try:
-        temperature, humidity = dhtreader.read(22, dhtPin)
-    except:
-        print('Error reading sensor')
-    
-    if isinstance(temperature, float) and isinstance(humidity, float):
-        with open('TEMP', 'w') as t:
-            t.write('{0:.2f}'.format(temperature))
-        with open('HUMIDITY','w') as h:
-            h.write('{0:.2f}'.format(humidity))
-    	print(str(temperature) + " " + str(humidity))
-    time.sleep(10)
+    p = subprocess.Popen('/home/pi/brams-atmo/bin/loldht', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, error = p.communicate()
+    for line in out.split('\n'):
+        if line.startswith('Humidity'):
+            humidity = line[11:16]
+            temperature = line[33:38]
+            with open('TEMP', 'w') as t:
+                t.write(temperature)
+            with open('HUMIDITY','w') as h:
+                h.write(humidity)
+            print(temperature + ' ' + humidity)
+
+    time.sleep(config_data['poll_interval'])
