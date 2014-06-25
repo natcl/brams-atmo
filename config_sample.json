@@ -2,6 +2,7 @@
 	"name": "name_of_device",
 	"location": "Name of location",
 	"lcd_driver": "sparkfun",
+	"dht_driver": "adafruit",
 	"poll_interval": 5,
         "email_notifications": true,
 	"smtp_server": "smtp.umontreal.ca",
